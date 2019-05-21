@@ -1,0 +1,18 @@
+.table_tatahousing .table-bordered>thead>tr>th {
+    border: 0;
+}
+.table_tatahousing .password{word-break: break-all;}
+.table_contactdetails .email{word-break: break-all;}
+.table_tatahousing .addresstext{
+    line-height: 3;
+    padding: 14px;
+
+}
+
+.addressalign{
+    text-align: right;
+}
+
+.cursorPionter{
+    cursor: pointer;
+}

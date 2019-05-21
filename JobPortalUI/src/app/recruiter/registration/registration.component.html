@@ -1,0 +1,418 @@
+<html lang="en">
+
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+
+<body>
+  <header>
+    <div class="header_banner">
+      <!-- <div class="topnav hidden-xs">
+            <div class="search-container">
+                <form>
+                  <input type="text" placeholder="Search.." name="search">
+                  <button type="submit">SEARCH</button>
+                </form>
+              </div>
+              </div>
+              <div class="notifications hidden-xs">
+                    <span class="glyphicon glyphicon-bell pull-right"></span>
+              </div> -->
+
+    </div>
+  </header>
+  <div class="container">
+    <div class="row regis_form">
+      <div class="col-md-12" style="padding:0;">
+        <h2>Registration
+          <span class="pull-right" style="cursor: pointer;
+      font-size: 20px;">
+            <a href="#" routerLink='/recruiter'>Home</a>
+          </span>
+        </h2>
+      </div>
+      <form [formGroup]="registerFormCompanyDetails">
+        <div class="col-md-12">
+          <h4>Company Details</h4>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Company Name:
+            </label>
+            <input type="text" class="form-control" formControlName="companyName" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }"
+            />
+            <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+              <div *ngIf="f.companyName.errors.required" style="color:red;">Company Name is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Website Address:
+            </label>
+            <input type="text" class="form-control" formControlName="website" [ngClass]="{ 'is-invalid': submitted && f.website.errors }"
+            />
+            <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
+              <div *ngIf="f.website.errors.required" style="color:red;">website is required</div>
+              <div *ngIf="f.website.errors.validUrl" style="color:red;">website url is not in correct format</div>
+            </div>
+            <!-- <div *ngIf="f.website.hasError('validUrl')">
+            <span style="color:red;">website url is not in correct format</span>
+          </div> -->
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h5>(Companies needs to be registered as per the incorporation)</h5>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Recruiter Industry:
+            </label>
+            <select class="form-control" formControlName="industry">
+              <option *ngFor="let rIndustry of rIndustrys" [value]="rIndustry.value">
+                {{rIndustry.viewValue}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.industry.errors" class="invalid-feedback">
+              <div *ngIf="f.industry.errors.required" style="color:red;">Recruiter Industry is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Line 1:
+            </label>
+            <input type="text" class="form-control" formControlName="address1" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }"
+            />
+            <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+              <div *ngIf="f.address1.errors.required" style="color:red;">Line 1 is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Line 2:
+            </label>
+            <input type="text" class="form-control" formControlName="address2" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }"
+            />
+            <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+              <div *ngIf="f.address2.errors.required" style="color:red;">Line 2 is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> City:
+            </label>
+            <input type="text" class="form-control" formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+              <div *ngIf="f.city.errors.required" style="color:red;">City is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Country:
+            </label>
+            <input type="text" class="form-control" formControlName="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
+            />
+            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+              <div *ngIf="f.country.errors.required" style="color:red;">Country is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Zip Code:
+            </label>
+            <input type="text" class="form-control" (keypress)="numberOnly($event)" maxlength="5" formControlName="zipCode" [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }">
+            <div *ngIf="submitted && f.zipCode.errors" class="invalid-feedback">
+              <div *ngIf="f.zipCode.errors.required" style="color:red;">Zip Code is required</div>
+            </div>
+            <div class="invalid-feedback">
+              <span style="color: red;">{{this.enterNumberOnly}}</span>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form [formGroup]="registerFormContactDetails">
+        <div class="col-md-12">
+          <h4>Contact Details</h4>
+          <p>All placement related information will be sent to the first contact. Please tick the check box below.</p>
+          <h5>First Contact</h5>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Title:</label>
+
+            <select class="form-control" formControlName="fctitle">
+              <option *ngFor="let title of titles" [value]="title.value">
+                {{title.viewValue}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f1.fctitle.errors" class="invalid-feedback">
+              <div *ngIf="f1.fctitle.errors.required" style="color:red;">Title is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> First Name:</label>
+
+            <input type="text" class="form-control" formControlName="fcfirstName" [ngClass]="{ 'is-invalid': submitted && f1.fcfirstName.errors }"
+            />
+            <div *ngIf="submitted && f1.fcfirstName.errors" class="invalid-feedback">
+              <div *ngIf="f1.fcfirstName.errors.required" style="color:red;">First Name is required</div>
+            </div>
+
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Last Name:</label>
+
+            <input type="text" class="form-control" formControlName="fclastName" [ngClass]="{ 'is-invalid': submitted && f1.fclastName.errors }">
+            <div *ngIf="submitted && f1.fclastName.errors" class="invalid-feedback">
+              <div *ngIf="f1.fclastName.errors.required" style="color:red;">Last Name is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Designation:</label>
+
+            <input type="text" class="form-control" formControlName="fcdesignation" [ngClass]="{ 'is-invalid': submitted && f1.fcdesignation.errors }">
+            <div *ngIf="submitted && f1.fcdesignation.errors" class="invalid-feedback">
+              <div *ngIf="f1.fcdesignation.errors.required" style="color:red;">Designation is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Office:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Phone:</label>
+            <input type="text" (keypress)="numberOnly($event)" maxlength="10" class="form-control" formControlName="fcphoneNumber" [ngClass]="{ 'is-invalid': submitted && f1.fcphoneNumber.errors }">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Mobile:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Alternate Phone:</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Fax:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Email ID:</label>
+            <input type="email" class="form-control" formControlName="fcemailId" [ngClass]="{ 'is-invalid': submitted && f1.fcemailId.errors }">
+            <div *ngIf="submitted && f1.fcemailId.errors" class="invalid-feedback">
+              <div *ngIf="f1.fcemailId.errors.required" style="color:red;">Email ID is required</div>
+              <div *ngIf="f1.fcemailId.hasError('email')" style="color:red;">Email must be a valid email address</div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label"></label>
+            <input type="checkbox" style="width:15px;" (change)="fctoggleVisibility($event)">
+            <span>Send username & password to this contact</span>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h5>Second Contact</h5>
+          <div class="form-group col-md-4">
+            <label class="control-label">Title:</label>
+
+            <select class="form-control" formControlName="sctitle">
+              <option *ngFor="let title of titles" [value]="title.value">
+                {{title.viewValue}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">First Name:</label>
+
+            <input type="text" class="form-control" formControlName="scfirstName" [ngClass]="{ 'is-invalid': submitted && f1.scfirstName.errors }">
+
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Last Name:</label>
+            <input type="text" class="form-control" formControlName="sclastName" [ngClass]="{ 'is-invalid': submitted && f1.sclastName.errors }">
+
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Designation</label>
+            <input type="text" class="form-control" formControlName="scdesignation" [ngClass]="{ 'is-invalid': submitted && f1.scdesignation.errors }">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Office:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Phone:</label>
+            <input type="text" class="form-control" (keypress)="numberOnly($event)" placeholder="Phone" formControlName="scphoneNumber"
+              [ngClass]="{ 'is-invalid': submitted && f1.scphoneNumber.errors }">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Mobile:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Alternate Phone:</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Fax:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Email ID:</label>
+            <input type="email" class="form-control" formControlName="scemailId" [ngClass]="{ 'is-invalid': submitted && f1.scemailId.errors }"
+            />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label"></label>
+            <input type="checkbox" style="width:15px;" (change)="sctoggleVisibility($event)">
+            <span>Send username & password to this contact</span>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <h5>Third Contact</h5>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Title:
+            </label>
+            <select class="form-control" formControlName="tctitle">
+              <option *ngFor="let title of titles" [value]="title.value">
+                {{title.viewValue}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f1.tctitle.errors" class="invalid-feedback">
+              <div *ngIf="f1.tctitle.errors.required" style="color:red;">Title is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> First Name:
+            </label>
+            <input type="text" class="form-control" formControlName="tcfirstName" [ngClass]="{ 'is-invalid': submitted && f1.tcfirstName.errors }">
+            <div *ngIf="submitted && f1.tcfirstName.errors" class="invalid-feedback">
+              <div *ngIf="f1.tcfirstName.errors.required" style="color:red;">First Name is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Last Name:</label>
+
+            <input type="text" class="form-control" formControlName="tclastName" [ngClass]="{ 'is-invalid': submitted && f1.tclastName.errors }">
+            <div *ngIf="submitted && f1.tclastName.errors" class="invalid-feedback">
+              <div *ngIf="f1.tclastName.errors.required" style="color:red;">Last Name is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Designation:</label>
+
+            <input type="text" class="form-control" formControlName="tcdesignation" [ngClass]="{ 'is-invalid': submitted && f1.tcdesignation.errors }">
+            <div *ngIf="submitted && f1.tcdesignation.errors" class="invalid-feedback">
+              <div *ngIf="f1.tcdesignation.errors.required" style="color:red;">Designation is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Office:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Phone:</label>
+            <input type="text" class="form-control" (keypress)="numberOnly($event)" maxlength="10" formControlName="tcphoneNumber" [ngClass]="{ 'is-invalid': submitted && f1.tcphoneNumber.errors }">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Mobile:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Alternate Phone:</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">Fax:</label>
+            <select class="form-control">
+              <option>India(91)</option>
+              <option>Iceland(354)</option>
+              <option>Iran(98)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Email ID:</label>
+
+            <input type="email" class="form-control" formControlName="tcemailId" [ngClass]="{ 'is-invalid': submitted && f1.tcemailId.errors }">
+            <div *ngIf="submitted && f1.tcemailId.errors" class="invalid-feedback">
+              <div *ngIf="f1.tcemailId.errors.required" style="color:red;">Email ID is required</div>
+              <div *ngIf="f1.tcemailId.hasError('email')" style="color:red;">Email must be a valid email address</div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label"></label>
+            <input type="checkbox" style="width:15px;" (change)="tctoggleVisibility($event)">
+            <span>Send username & password to this contact</span>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Captcha:</label>
+            <input type="text" class="form-control" (blur)="validateCaptcha($event)" formControlName="captcha" [ngClass]="{ 'is-invalid': submitted && f1.captcha.errors }">
+            <div *ngIf="submitted && f1.captcha.errors" class="invalid-feedback">
+              <div *ngIf="f1.captcha.errors.required" style="color:red;">Captcha is required</div>
+            </div>
+            <div class="invalid-feedback">
+              <span style="color: red;">{{this.errormessage}}</span>
+            </div>
+          </div>
+          <div class="form-group col-md-2" style="margin-top: 27px;">
+            <span style="background-color: aqua;border: black 1px solid;padding: 7px;">{{this.captcha}}</span>
+          </div>
+        </div>
+        <div class="col-md-12 text-center" style="margin-bottom:30px;">
+          <button class="btn btn-md slds-button--brand" (click)="submit()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row regis_form">
+        <div class="col-md-12" style="padding:0;">
+            <h2>View All Job Posting</h2>
+        </div>
+        <div class="col-md-12" style="margin-top: 10px;">
+            <!-- <form> -->
+            <div class="form-group col-md-4">
+                <label class="control-label">Select Company:</label>
+                <select class="form-control">
+                    <option>A.T.Kearney Limited</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">Position:</label>
+                <select class="form-control">
+                    <option>All</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">Position Type:</label>
+                <select class="form-control">
+                    <option>All</option>
+                </select>
+            </div>
+            <!-- </form> -->
+
+        </div>
+        <div class="col-md-12 text-center" style="margin-bottom:30px;">
+            <button class="btn btn-md slds-button--brand">Submit</button>
+        </div>
+        <div class="col-md-12">
+            <!-- <button class="btn btn-xs btn-primary pull-right" style="margin-bottom: 10px;" routerLink='/recruiter/postjob' >Add New Job</button> -->
+            <button class="btn btn-md slds-button--brand pull-right" style="margin-bottom: 10px;" (click)="addNewJob()">Add New Job</button>
+        </div>
+        <div class="table-responsive col-md-12 col-sm-12 table_view">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Group Function</th>
+                        <th>Role Function</th>
+                        <th>Edit Job</th>
+                        <th>View Job</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Senior Analyst/Associate</td>
+                        <td>Consulting</td>
+                        <td>Consulting</td>
+                        <td>Job Broadcasted</td>
+                        <td>
+                            <a  class="btn btn-md slds-button--brand">View Job</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

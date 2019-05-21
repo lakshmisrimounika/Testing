@@ -1,0 +1,671 @@
+<div class="container">
+    <div class="row regis_form">
+      <div class="col-md-12" style="padding:0;">
+        <h2>Activate Recruiters
+        </h2>
+      </div>
+  
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12" style="margin-top: 10px;">
+            <button class="btn btn-md slds-button--brand pull-right" style="margin-bottom: 10px;margin-left:10px;" (click)="deleteRecruiters()">Delete Recruiters</button>
+            <button class="btn btn-md slds-button--brand pull-right" style="margin-bottom: 10px;" (click)="activateRe()">Activate Recruiters</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <div class="table-responsive table_view">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" (change)="selectAll()" [checked]="selectedAll">
+                        <span class="checkmark"></span>
+                      </label>
+                    </th>
+                    <th>Company Name</th>
+                    <th>Contacts</th>
+                    <th>Address</th>
+                    <th>LoginID</th>
+                    <th>Password</th>
+                    <th>Registered On</th>
+                    <!-- <th>Zone</th>
+                <th>Coordinator</th>
+                <th>CR</th>
+                <th>Campus</th>
+                <th>Location</th>
+                <th>Old/New/First Time</th>
+                <th>Company Category</th>
+                <th>Tiering Day</th>
+                <th>Process Coordinator</th>
+                <th>Rcvd Signed PDF</th>
+                <th>Invoice Raised</th>
+                <th>Comp Year</th>
+                <th>Comp ID</th>
+                <th>CAS Industry</th> -->
+                    <th>Action </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let res of activateRecruiters; let i=index">
+                    <td>
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" (change)="changeSelect(res, $event)" [checked]="res.selected">
+                        <span class="checkmark"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <a (click)="companyDetail(res.companyID)" class="cursorPionter" data-toggle="modal" data-target="#myModal">{{res.companyName}}</a>
+                    </td>
+                    <td>{{res.companyID}}</td>
+                    <td>{{res.address}}</td>
+                    <td>{{res.loginID}}</td>
+                    <td>{{res.password}}</td>
+                    <td>{{res.regDate}}</td>
+                    <!-- <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let zone of zones" [selected]="zone.value == res.zoneID">
+                        {{zone.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let coordinator of coordinators" [selected]="coordinator.value == res.coordinatorID">
+                        {{coordinator.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option>
+                        Select
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let campus of campuses" [selected]="campus.value == res.campusID">
+                        {{campus.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let location of locations" [selected]="location.value == res.zoneID">
+                        {{location.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let time of times" [selected]="time.value == res.zoneID">
+                        {{time.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let cc of companyCategories" [selected]="cc.value == res.zoneID">
+                        {{cc.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let td of tiringdays" [selected]="td.value == res.zoneID">
+                        {{td.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let pc of processCoordinators" [selected]="pc.value == res.zoneID">
+                        {{pc.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" ([ngModel])="res.recSignedPDF">
+                  </div>
+                </td>
+                <td>
+                  <div class="row">
+                    <div class="col-md-1">
+                      <input type="radio" name="option" value="Yes">Yes
+                    </div>
+                    <div class="col-md-1">
+                      <input type="radio" name="option" value="No">No
+                    </div>
+                    <div class="col-md-1">
+                      <input type="radio" name="option" value="Yet to Confirm">Yet to Confirm
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+                <td>
+                  <div class="btn-group" style="width: 125px;">
+                    <select class="form-control">
+                      <option *ngFor="let ci of casIndustries" [selected]="ci.value == res.zoneID">
+                        {{ci.viewValue}}
+                      </option>
+                    </select>
+                  </div>
+                </td>-->
+                    <td>
+                      <a (click)="Edit(res.companyID)" class="btn btn-md slds-button--brand cursorPionter" data-toggle="modal" data-target="#myEditModal">Edit</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #5bc0de;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: white;">Company Details</h4>
+        </div>
+        <div class="modal-body verticalScroll">
+          <div class="table-responsive table_view table_tatahousing horizantalscroll">
+            <h3>Tata Housing Development Company Limited</h3>
+  
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Company Details</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="companyDetails">
+                  <td>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Industry Group</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.industryGroup==""?"N/A":companyDetails.industryGroup}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Website</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.website==""?"N/A":companyDetails.website}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Industry Co-Ordinator</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.industry==""?"N/A":companyDetails.industry}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <span class="addresstext">Address</span>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Line 1</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b> {{companyDetails.address1==""?"N/A":companyDetails.address1}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Line 2</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b> {{companyDetails.address2==""?"N/A":companyDetails.address2}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>City </span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.city==""?"N/A":companyDetails.city}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Country </span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.country==""?"N/A":companyDetails.country}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Zip Code</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.zipCode==""?"N/A":companyDetails.zipCode}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Username </span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{companyDetails.loginID==""?"N/A":companyDetails.loginID}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Password</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b class="password">{{companyDetails.password==""?"N/A":companyDetails.password}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <div class="table-responsive table_view horizantalscroll" style="margin-top: 20px;">
+            <h3>Contact Details</h3>
+            <table class="table table-bordered table_contactdetails">
+              <thead>
+                <tr>
+                  <th>First Contact</th>
+                  <th>Second Contact </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td *ngIf="contactDetails && contactDetails[0]">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Title</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].title==""?"N/A":contactDetails[0].title}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>First Name</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].firstName==""?"N/A":contactDetails[0].firstName}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Last Name</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].lastName==""?"N/A":contactDetails[0].lastName}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Designation</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].designation==""?"N/A":contactDetails[0].designation}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Office Phone</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].officeCCode}}-{{contactDetails[0].officeACode}}-{{contactDetails[0].officePh}}-{{contactDetails[0].officeExt}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Mobile</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].mobileCCode}}-{{contactDetails[0].mobile}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Alternative Phone</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b></b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Fax</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[0].faxCCode}}-{{contactDetails[0].fax}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Email ID</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>
+                              <a class="email" href="mailto: {{contactDetails[0].emailID}}">{{contactDetails[0].emailID==""?"N/A":contactDetails[0].emailID}}</a>
+                            </b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngIf="contactDetails && contactDetails[1]">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Title</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].title==""?"N/A":contactDetails[1].title}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>First Name</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].firstName==""?"N/A":contactDetails[1].firstName}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Last Name</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].lastName==""?"N/A":contactDetails[1].lastName}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Designation</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].designation==""?"N/A":contactDetails[1].designation}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Office Phone</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].officeCCode}}-{{contactDetails[1].officeACode}}-{{contactDetails[1].officePh}}-{{contactDetails[1].officeExt}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Mobile</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].mobileCCode}}-{{contactDetails[1].mobile}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Alternative Phone</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b></b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Fax</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>{{contactDetails[1].faxCCode}}-{{contactDetails[1].fax}}</b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <span>Email ID</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>
+                            <b>
+                              <a class="email" href="mailto: {{contactDetails[1].emailID}}">{{contactDetails[1].emailID==""?"N/A":contactDetails[1].emailID}}</a>
+                            </b>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <!-- <span>{{ companyDetails.companyID }}</span>
+          <p> {{ companyDetails.companyName }} </p> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-md slds-button--brand" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal fade" id="myEditModal" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #5bc0de;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: white;">Edit Company Details</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <form>
+              <div class="form-group">
+                <label for="companyName" class="col-md-4 text-right">Company Name</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" id="companyName" placeholder="Company Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contact" class="col-md-4 text-right">Contact</label>
+                <div class="col-md-8 margintop">
+                  <input type="text" class="form-control" id="contact" placeholder="Contact">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address" class="col-md-4 text-right">Address</label>
+                <div class="col-md-8 margintop">
+                  <input type="text" class="form-control" id="address" placeholder="Address">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="loginID" class="col-md-4 text-right">Login ID</label>
+                <div class="col-md-8 margintop">
+                  <input type="password" class="form-control" id="loginID" placeholder="Login ID">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-md-4 text-right">Password</label>
+                <div class="col-md-8 margintop">
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="registeredOn" class="col-md-4 text-right">Registered On</label>
+                <div class="col-md-8 margintop">
+                  <input type="text" class="form-control" id="registeredOn" placeholder="Registered On">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-md-12 margintop">
+              <button type="submit" class="btn btn-md slds-button--brand col-md-offset-4">Submit</button>
+              <button type="button" class="btn btn-md slds-button--brand" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

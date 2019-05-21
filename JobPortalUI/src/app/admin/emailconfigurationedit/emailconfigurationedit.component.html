@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="row regis_form">
+    <div class="col-md-12" style="padding:0;">
+      <h2>Email Configuration</h2>
+    </div>
+    <div class="col-md-12" style="padding-top: 20px;"></div>
+    <form [formGroup]="myForm" novalidate class="col-md-12 pull-center">
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="hidden" formControlName="Id" placeholder="id" name="id" class="form-control" id="id" value="0">
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <label>Form Name</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" formControlName="formName" placeholder="Form Name" name="formName" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <label>From Mail ID</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" formControlName="formEmailId" placeholder="From Mail ID" name="formEmailId"
+              class="form-control">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <label>CC Mail ID</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" formControlName="ccMailId" placeholder="CC Mail ID" name="ccMailId" class="form-control">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <label>BCC Mail ID</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" formControlName="bccEmailId" placeholder="BCC Mail ID" name="bccEmailId"
+              class="form-control">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <label>Subject</label>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" formControlName="subject" placeholder="subject" name="subject" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-md-12" style="padding-bottom:30px;">
+          <div class="col-md-2">
+            <label>Purpose</label>
+          </div>
+          <div class="form-group col-md-6">
+            <textarea class="form-control" rows="5" placeholder="Purpose" formControlName="purpose"></textarea>
+
+            <!-- <textarea  formControlName="purpose" placeholder="Form Name" name="purpose" class="form-control"></textarea> -->
+          </div>
+        </div>
+
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+          <div class="col-md-2">
+            <label>Mail Content</label>
+          </div>
+          <div class="col-md-10">
+            <!-- <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate> -->
+            <div class="form-group has-feedback">
+              <!-- <ckeditor [(ngModel)]="mycontent" #myckeditor="ngModel" name="myckeditor" required [config]="ckeConfig"
+              debounce="500" (change)="onChange($event)">
+            </ckeditor> -->
+              <ckeditor formControlName="mycontent" id="myckeditor" name="myckeditor" required [config]="ckeConfig"
+                debounce="500" (change)="onChange($event)">
+              </ckeditor>
+              <div *ngIf="submitted && f.mycontent.errors" class="invalid-feedback">
+                <div *ngIf="f.mycontent.errors.required">Content is required</div>
+                <!-- <div *ngIf="f.LoginId.errors.email">Email must be a valid email address</div> -->
+              </div>
+              <!-- <div *ngIf="!myckeditor.valid && myckeditor.touched" class="help-block">Required field.</div> -->
+            </div>
+            <div style="padding-bottom: 15px;">
+              <button [disabled]="!myForm.valid" (click)="saveConfig(myForm.value)" class="btn btn-md slds-button--brand"
+                style="margin:3px;width:85px;">Save</button>
+              <!-- </form> -->
+              <!-- <div [innerHTML]="mycontent"></div> -->
+              <button (click)="cancel()" style="margin: 5px;" class="btn btn-md slds-button--brand">Cancel</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

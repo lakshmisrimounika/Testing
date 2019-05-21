@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ISB Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+</head>
+
+<body class="loginpage">
+  <div class="loginsearch">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <img src="../../../assets/images/Indian_School_of_Business_logo.png" class="logo" alt="Indian_School_of_Business_logo" />
+        </div>
+        <!-- <h2 id="header">Log In Using</h2>
+        <div id="idp_section_chooser">
+            <div id="idp_chooser">
+                <label for="idp_search">Quick Find</label>
+                <div class="input-group" style="display: block;">
+                  <select class="custom-select">
+                    <option selected>Quick Find</option>
+                    <option value="1">PGPPRO Click here to login</option>
+                    <option value="2">PGP Click here to login</option>
+                    <option value="3">PGPMAX Click here to login</option>
+                    <option value="4">PGPMFAB Click here to login</option>
+                  </select>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-sm-12">
+          <div class="col-md-4"></div>
+          <form [formGroup]="loginForm" novalidate (ngSubmit)="onLogin()" class="col-md-4 pull-center">
+            <!-- <form class="col-md-4 pull-center"> -->
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" formControlName="LoginId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LoginId.errors }"
+              />
+              <div *ngIf="submitted && f.LoginId.errors" class="invalid-feedback">
+                <div *ngIf="f.LoginId.errors.required">User Name is required</div>
+                <!-- <div *ngIf="f.LoginId.errors.email">Email must be a valid email address</div> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <!-- <input type="password" class="form-control" id="pwd"> -->
+              <input type="password" formControlName="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }"
+              />
+              <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                <div *ngIf="f.Password.errors.required">Password is required</div>
+                <div *ngIf="f.Password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </div>
+            <div class="checkbox">
+              <label>
+                <b>
+                  <input type="checkbox"> Remember me</b>
+              </label>
+              <label style="float: right;">
+                <b>
+                  <a data-toggle="modal" (click)="openDialog()">Forgot Password?</a>
+                </b>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-md slds-button--brand">Login</button>
+            <!-- <p>Indian School of Business employee?
+              <a href="#" routerLink='../recruiter/registration'>Register</a>
+            </p> -->
+          </form>
+
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <!-- <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 350px;">
+  
+      <!-- Modal content-->
+  <!-- <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>Forget Password</b></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" class="form-control" id="email">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="ForgotPassword(EmailID.value)">Submit</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>  -->
+  <!-- New Modal -->
+
+
+  <div class="backdrop"  [ngStyle]="{'display':display}"></div>
+  <div class="modal"  tabindex="-1"  role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog"  role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button"  class="close"  aria-label="Close"  (click)="onCloseHandled()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title"  style="text-align: center">What's My Password?</h2>
+        </div>
+        <form [formGroup]="forgotForm">
+          <div class="modal-body"  style="text-align: center;">
+            <p>Your Password will be sent to your registered Email Address</p>
+            <!-- <input class="form-control" type="email" [(ngModel)]="user.emailAddress" name="emailAddress" placeholder="first.last@example.com" validateEmail/> -->
+            <input type="text" style="width: 60%;
+          margin: auto;" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && f1.email.errors }"
+            />
+            <div *ngIf="submitted1 && f1.email.errors" class="invalid-feedback">
+              <div *ngIf="f1.email.errors.required">Email is required</div>
+              <div *ngIf="f1.email.errors.email">Email must be a valid email address</div>
+            </div>
+            <br/>
+            <button type="button"  class="btn btn-primary"  style="height: 40px;width: 150px;"  (click)="ForgotPassword()">Send My Password</button>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-md slds-button--brand"  (click)="onCloseHandled()">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal !-->
+
+
+
+
+</body>
+
+</html>
+
+<style>
+  .invalid-feedback {
+    color: #f44336;
+  }
+
+  .is-invalid {
+    border-color: #f44336;
+    border-radius: 4px;
+  }
+</style>

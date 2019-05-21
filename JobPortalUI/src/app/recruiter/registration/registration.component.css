@@ -1,0 +1,36 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.fontsize{
+    font-size: 12px;
+}
+
+.header{
+    background: rgba(45, 93, 125, 0.09);
+    padding: 5px;
+}
+
+.example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px !important;    
+  }
+  
+  .example-margin {
+    margin: 0 10px;    
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+  

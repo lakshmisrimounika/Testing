@@ -1,0 +1,47 @@
+<!-- <p>
+  emailconfiguration works!
+</p> -->
+<!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-xs btn-primary pull-left" style="margin-bottom: 10px;margin-left:10px;" >Add Message</button>
+    </div>
+    </div> -->
+<div class="container">
+  <div class="row regis_form">
+    <div class="col-md-12" style="padding:0;">
+      <h2>Email Configuration</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="table-responsive table_view">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="display: none;">Id</th>
+                <th>Mail Subject</th>
+                <th>Mail Purpose</th>
+                <th>Seq</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let mail of mailConfig">
+                <td style="display: none;">{{mail.Id}}</td>
+                <td>{{mail.Subject}}</td>
+                <td>{{mail.Purpose}}</td>
+                <td>{{mail.seq}}</td>
+                <td>
+                  <button (click)="disabledmail(mail)" class="btn btn-md slds-button--brand"> Disabled </button>
+                  <button (click)="editmail(mail)" style="margin-left: 20px;" class="btn btn-md slds-button--brand"> Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

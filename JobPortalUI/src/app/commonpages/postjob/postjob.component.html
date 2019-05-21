@@ -1,0 +1,283 @@
+<!-- <p>
+  postjob works!
+</p> -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">  -->
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> -->
+<div class="container">
+  <div class="row regis_form">
+    <div class="col-md-12" style="padding:0;">
+      <h2>Post Job</h2>
+    </div>
+    <div>
+      <form [formGroup]="postJobForm" novalidate class="form" (ngSubmit)="onPostJob()">
+        <div class="col-md-12">
+          <h4>Enter Job Details</h4>
+          <p>(All Fields are mandatory)</p>
+          <!-- <form> -->
+          <div class="form-group">
+            <input type="hidden" formControlName="jobID" placeholder="id" name="id" class="form-control" id="id"
+              value="0">
+          </div>
+        </div>
+        
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Job Title:</label>
+            <input type="text" formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && f.jobTitle.errors }"
+              class="form-control">
+            <div *ngIf="submitted && f.jobTitle.errors" class="invalid-feedback">
+              <div *ngIf="f.jobTitle.errors.required">Job Title is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Role Function:</label>
+            <select class="form-control" formControlName="roleFunction"
+              [ngClass]="{ 'is-invalid': submitted && f.roleFunction.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor=" let item of roleFunction" [value]="item">
+                {{item}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.roleFunction.errors" class="invalid-feedback">
+              <div *ngIf="f.roleFunction.errors.required">Role Function is required</div>
+            </div>
+
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Job Category:</label>
+            <select class="form-control" formControlName="jobCategoryID"
+              [ngClass]="{ 'is-invalid': submitted && f.jobCategoryID.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor="let category of jobCategory" [value]="category.value">
+                {{category.viewValue}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.jobCategoryID.errors" class="invalid-feedback">
+              <div *ngIf="f.jobCategoryID.errors.required">Job Category is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group col-md-12">
+              <label class="control-label">
+                <span style="color:red;">*</span> Job Description:</label>
+                <textarea class="form-control" rows="5" formControlName="jobDescription"
+                [ngClass]="{ 'is-invalid': submitted && f.jobDescription.errors }"></textarea>
+  
+              <div *ngIf="submitted && f.jobDescription.errors" class="invalid-feedback">
+                <div *ngIf="f.jobDescription.errors.required">Job Description is required</div>
+              </div>
+            </div>
+          </div>
+      
+        <div class="col-md-12">
+          <div class="col-md-4" style="padding: 0px;">
+            <div class="form-group col-md-8" >
+              <label class="control-label">
+                <span style="color:red;">*</span> Upload Doc:</label>
+
+              <div class="btn btn-primary btn-sm float-left form-control" style="background-color: #847d7d;">
+                <!-- <span>Choose file</span> -->
+                <input type="file" ng2FileSelect [uploader]="uploader" style="width: 103%;" formControlName="uploader"
+                  [ngClass]="{ 'is-invalid': submitted && f.uploader.errors }">
+                <br />
+                <div *ngIf="submitted && f.uploader.errors" class="invalid-feedback">
+                  <div *ngIf="f.uploader.errors.required" style="margin: 0px -73px 0px -195px;">Upload Doc is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4" style="padding-top: 19px;">
+              <!-- <input type="file" ng2FileSelect [uploader]="uploader" /> -->
+              <button type="button"
+                style="padding: 4px 5px;font-size: 13px;line-height: 1.6;border-radius: 3px;background-color: #9f7474;"
+                class="btn btn-success btn-xs" (click)="uploaderItem(uploader.queue)">uploade file</button>
+              <input type="hidden" id="path" />
+            </div>
+            <!-- <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload your file">
+                          </div> -->
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Salary Range:</label>
+            <input type="text" class="form-control" formControlName="salrange"
+              [ngClass]="{ 'is-invalid': submitted && f.salrange.errors }">
+            <div *ngIf="submitted && f.salrange.errors" class="invalid-feedback">
+              <div *ngIf="f.salrange.errors.required">Salary Range is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Currency:</label>
+            <select class="form-control" formControlName="currency"
+              [ngClass]="{ 'is-invalid': submitted && f.currency.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor="let currency of CurrencyData" [value]="currency">
+                {{currency}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.currency.errors" class="invalid-feedback">
+              <div *ngIf="f.currency.errors.required">Currency is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Years of Experience:</label>
+            <select class="form-control" formControlName="yearofExp"
+              [ngClass]="{ 'is-invalid': submitted && f.yearofExp.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor="let yearsofExp of yearOfExpData" [value]="yearsofExp">
+                {{yearsofExp}}
+              </option>
+            </select>
+
+            <div *ngIf="submitted && f.yearofExp.errors" class="invalid-feedback">
+              <div *ngIf="f.yearofExp.errors.required">Years of Experience is required</div>
+            </div>
+
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Division:</label>
+            <input type="text" class="form-control" formControlName="division"
+              [ngClass]="{ 'is-invalid': submitted && f.division.errors }">
+            <div *ngIf="submitted && f.division.errors" class="invalid-feedback">
+              <div *ngIf="f.division.errors.required">Division is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Email ID:</label>
+            <input type="email" class="form-control" formControlName="emailID"
+              [ngClass]="{ 'is-invalid': submitted && f.emailID.errors }">
+            <div *ngIf="submitted && f.emailID.errors" class="invalid-feedback">
+              <div *ngIf="f.emailID.errors.required">Email ID is required</div>
+              <div *ngIf="f.emailID.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Name:</label>
+            <input type="text" class="form-control" formControlName="name"
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <h4>Location</h4>
+
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> City:</label>
+            <input type="text" class="form-control" formControlName="location"
+              [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
+            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+              <div *ngIf="f.location.errors.required">City is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Country:</label>
+            <select class="form-control" formControlName="countryID"
+              [ngClass]="{ 'is-invalid': submitted && f.countryID.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor="let country of CountryData" [value]="country">
+                {{country}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.countryID.errors" class="invalid-feedback">
+              <div *ngIf="f.countryID.errors.required">Country is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Deadline:</label>
+            <input type="text" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+              placement="right" formControlName="deadlineDate"
+              [ngClass]="{ 'is-invalid': submitted && f.deadlineDate.errors }">
+            <!-- <span class="input-group-addon" (click)="deadlineDate.toggle()"> -->
+            <!-- <span class="fa fa-calendar pointer"></span> -->
+            <div *ngIf="submitted && f.deadlineDate.errors" class="invalid-feedback">
+              <div *ngIf="f.deadlineDate.errors.required">Deadline is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Expected date of shortlist:</label>
+            <input type="text" class="form-control" formControlName="expectedDateofShortlist" bsDatepicker
+              [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+              [ngClass]="{ 'is-invalid': submitted && f.expectedDateofShortlist.errors }">
+            <div *ngIf="submitted && f.expectedDateofShortlist.errors" class="invalid-feedback">
+              <div *ngIf="f.expectedDateofShortlist.errors.required"> Expected date is required</div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> Domestic day wise counter:</label>
+            <select class="form-control" formControlName="domesticDayWiseCounters"
+              [ngClass]="{ 'is-invalid': submitted && f.domesticDayWiseCounters.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor="let domestic of domesticDayWiseCounters" [value]="domestic">
+                {{domestic}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.domesticDayWiseCounters.errors" class="invalid-feedback">
+              <div *ngIf="f.domesticDayWiseCounters.errors.required">Domestic day wise counter is required</div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label class="control-label">
+              <span style="color:red;">*</span> CGPA Term:</label>
+            <select class="form-control" formControlName="cgpa"
+              [ngClass]="{ 'is-invalid': submitted && f.cgpa.errors }">
+              <option [ngValue]="null">-- Select --</option>
+              <option *ngFor="let item of cgpa" [value]="item">
+                {{item}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.cgpa.errors" class="invalid-feedback">
+              <div *ngIf="f.cgpa.errors.required">CGPA is required</div>
+            </div>
+          </div>
+          <!-- <div class="form-group col-md-4">
+            <input type="file" ng2FileSelect [uploader]="uploader" />
+            <button type="button" class="btn btn-success btn-xs" (click)="uploaderItem(uploader.queue)">uploade dile</button>
+            <input type="hidden" id="path"/>
+          </div> -->
+        </div>
+        <div class="col-md-12 text-center" style="margin-bottom:30px;">
+          <button class="btn btn-md slds-button--brand">Submit</button>
+          <button (click)="cancel()" style="margin: 5px;" class="btn btn-md slds-button--brand">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+  <style>
+    .invalid-feedback {
+      color: #f44336;
+    }
+
+    .is-invalid {
+      border-color: #f44336;
+      border-radius: 4px;
+    }
+  </style>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dashboard Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="/assets/css/style.css" /> -->
+</head>
+
+<header>
+  <div class="header_banner">
+    <!-- <img src="assets/images/header_banner.jpg"> -->
+    <!-- <div class="topnav hidden-xs">
+        <div class="search-container">
+            <form>
+              <input type="text" placeholder="Search.." name="search">
+              <button type="submit">SEARCH</button>
+            </form>
+          </div>
+          </div>
+          <div class="notifications hidden-xs">
+                <span class="glyphicon glyphicon-bell pull-right"></span>
+          </div> -->
+    <div class="dropdown userdropdown">
+      <!-- <a [attr.href]="aType.Name"
+                     [attr.aria-controls]="aType.Name"
+                     role="tab"
+                     data-toggle="tab">
+                    {{aType.Name}}
+                  </a>  -->
+
+      <a class="dropdown-toggle" data-toggle="dropdown">{{userName}}
+        <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <!-- <li><a href="#" routerLink='/recruiter/dashboard'>Home</a></li> -->
+        <li><a href="#">My Profile</a></li>
+        <li><a href="#">Change Password</a></li>
+        <!-- <li [ngSwitch]="user">
+          <a href="#" *ngSwitchCase="1" routerLink="/">Logout</a>
+          <a href="#" *ngSwitchCase="2" routerLink="/admin">Logout</a>
+          <a href="#" *ngSwitchCase="3" routerLink="/alumni">Logout</a>
+
+        </li> -->
+        <li>
+          <label id="logout" (click)="logout()" style="font-size: 12px;padding: 13px 20px ;cursor: pointer;font-weight:400 !important">Logout</label>
+          <!-- <a href="#" (click)="logout()">Logout</a> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngSwitch]="1">
+            <a href="#" *ngSwitchCase="1" routerLink='/recruiter/dashboard'>Dashboard</a>
+            <a href="#" *ngSwitchCase="2" routerLink='/admin/dashboard'>Dashboard</a>
+            <a href="#" *ngSwitchCase="3" routerLink='/alumni/dashboard'>Dashboard</a>
+          </li>
+
+
+          <li class="dropdown" routerLinkActive="active" >
+            <a class="dropdown-toggle"  data-toggle="dropdown" href="#">Manage Jobs
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li [ngSwitch]="1">
+                <a href="#" *ngSwitchCase="1" routerLink='/recruiter/viewalljob'>View All Jobs</a>
+                <a href="#" *ngSwitchCase="2" routerLink='/admin/viewalljob'>View All Jobs</a>
+                <a href="#" *ngSwitchCase="3" routerLink='/alumni/viewalljob'>View All Jobs</a>
+              </li>
+
+              <li [ngSwitch]="1">
+                <a *ngSwitchCase="1" routerLink='/recruiter/postjob' href="#">Post Jobs</a>
+                <a *ngSwitchCase="2" routerLink='/admin/postjob' href="#">Post Jobs</a>
+                <a *ngSwitchCase="3" routerLink='/alumni/postjob' href="#">Post Jobs</a>
+
+              </li>
+              <li [ngSwitch]="1">
+                <a href="#" *ngSwitchCase="1" routerLink='/recruiter/listingjob'>Applied Jobs</a>
+                <a href="#" *ngSwitchCase="2" routerLink='/admin/listingjob'>Applied Jobs</a>
+                <a href="#" *ngSwitchCase="3" routerLink='/alumni/listingjob'>Applied Jobs</a>
+
+              </li>
+              <!-- <li><a href="#">ALUMINI SEARCH</a></li>
+                    <li><a href="#">FACULTY SEARCH</a></li>
+                    <li><a href="#">STUDENT SEARCH</a></li> -->
+            </ul>
+          </li>
+
+          <li class="dropdown" routerLinkActive="active">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Masters
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li >         
+                <a href="#" routerLink='/admin/emailconfiguration'>Email Configuration</a>
+              </li>
+            </ul>
+          </li>
+
+          <li routerLinkActive="active" [ngSwitch]="1">
+            <a href="#" *ngSwitchCase="1" routerLink='/recruiter/updatestatus'>Update Status</a>
+            <a href="#" *ngSwitchCase="2" routerLink='/admin/updatestatus'>Update Status</a>
+            <a href="#" *ngSwitchCase="3" routerLink='/alumni/updatestatus'>Update Status</a>
+          </li>
+          <!-- <li routerLinkActive="active"><a href="#" routerLink='/recruiter/listingjob'>Applied Alumni Listing</a></li>  -->
+        
+          <li class="dropdown" routerLinkActive="active">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Recruiters
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li [ngSwitch]="2">
+                <a href="#" *ngSwitchCase="2" routerLink='/admin/activaterecruiters'>Activate Recruiters</a>                
+              </li>
+
+              <li [ngSwitch]="2">               
+                <a *ngSwitchCase="2" routerLink='/admin/manageallrecruiters'>Manage All Recruiters</a>            
+              </li>            
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</body>
+
+</html>
