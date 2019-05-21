@@ -28,4 +28,6 @@ export class AppComponent {
     console.log("onChange");
     //this.log += new Date() + "<br />";
   }
+
+
 }
